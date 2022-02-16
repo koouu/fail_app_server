@@ -6,6 +6,5 @@ services:
       dockerfile: docker/app/Dockerfile
     tty: true
     ports:
-      - 3200:1323
-    volumes:
-      - .:/workspace/
+      - 1323:1323
+    
