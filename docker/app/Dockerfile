@@ -1,14 +1,22 @@
-FROM golang:1.17.6 as builder
-WORKDIR /workspace
-COPY . /workspace
-# alpine でも実行できるように GOOS と CGO_ENABLED を指定
-RUN CGO_ENABLED=0 GOOS=linux go build -o main cmd/api/main.go && chmod +x ./main
+# golangはversion1.17のalpine版を取得
+FROM golang:1.17-alpine3.15
+# 最初はGO111MODULE=onにする
+ENV  GO111MODULE=on
 
-FROM alpine:3.15
-WORKDIR /app
-RUN apk --no-cache add ca-certificates
-# root ユーザだとなんでもできてしまうため appuser を作成する
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-COPY --from=builder /workspace/main ./
-# コンテナを立ち上げたとき、勝手にWeb サーバーを立ち上げる
-CMD ["./main"]
+# アップデートとgitのインストール
+RUN apk update && apk add git
+# appディレクトリの作成
+RUN mkdir /go/src/app
+# ワーキングディレクトリの設定
+WORKDIR /go/src/app
+# ホストのファイルをコンテナの作業ディレクトリに移行
+ADD . /go/src/app
+
+RUN go get -u gorm.io/gorm && \ 
+    go get -u gorm.io/driver/mysql && \ 
+    go get github.com/labstack/echo/v4 && \ 
+    go get github.com/labstack/echo/v4/middleware 
+# realizeするときはGO111MODULE=offにする
+RUN GO111MODULE=off go get -u github.com/oxequa/realize
+
+CMD ["realize", "start"]
