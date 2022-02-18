@@ -11,7 +11,7 @@ var DB *gorm.DB
 var err error
 
 func init() {
-	dsn := "user:password@tcp(db-dev:3306)/db_name?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "user:password@tcp(db-dev:3306)/missdata?charset=utf8&parseTime=True&loc=Local"
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalln(dsn + "database can't connect")

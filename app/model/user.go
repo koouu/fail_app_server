@@ -6,8 +6,8 @@ import (
 
 type User struct {
 	Id        uint      `json:"id"`
-	Name      string    `json:"name" gorm:"type:varchar(20);"`
-	Password       string      `json:"password" gorm:"type:varchar(64);"`
+	Name      string    `json:"name" gorm:"type:varchar(20);not null"`
+	Password       string      `json:"password" gorm:"type:varchar(64);not null"`
 }
 
 func (p *User) FirstById(id uint) (tx *gorm.DB) {

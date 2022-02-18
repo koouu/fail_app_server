@@ -3,17 +3,23 @@ package router
 import (
 	"net/http"
 
+	"fail_app_server/controller"
+
 	"github.com/labstack/echo/v4"
 )
-func getHello(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello")
-}
+
+
 
 func Init() {
-	e := echo.New()  // echo を利用する
-    // GET リクエストでパスが `/` のとき第２引数の関数を実行する
-	e.GET("/",getHello )
+	e := echo.New()
 
-    // 1323 ポートでリッスンを開始。 start がエラーを起こしたら Fatal を起こしてログに記録する
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, World!")
+	})
+	e.GET("/user/:id", controller.GetUser)
+	e.POST("/user", controller.CreateUser)
+	e.PUT("/user/:id", controller.UpdateUser)
+	e.DELETE("/user/:id", controller.DeleteUser)
+
 	e.Logger.Fatal(e.Start(":1323"))
 }
