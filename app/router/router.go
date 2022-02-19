@@ -25,8 +25,8 @@ func Init() {
 	e.POST("/fail", controller.CreateFail)
 	e.PUT("/fail/:id", controller.UpdateFail)
 	e.DELETE("/fail/:id", controller.DeleteFail)
-	//e.GET("/fail", controller.GetAllFail)
-	//e.GET("/fail/:user_id", controller.GetUserFail)
+	e.GET("/fail", controller.GetAllFail)
+	e.GET("/fail/user/:user_id", controller.GetUserFail)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

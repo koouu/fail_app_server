@@ -16,11 +16,25 @@ func GetFail(c echo.Context) error {
 	return c.JSON(http.StatusOK, fail)
 }
 
-func CreateFail(c echo.Context) error {
-	content := c.FormValue("content")
+func GetAllFail(c echo.Context) error {
+	fails:=model.GetAllFail()
+	return c.JSON(http.StatusOK, fails)
+}
+
+func GetUserFail(c echo.Context) error {
 	u, _ := strconv.Atoi(c.Param("user_id"))
 	user_id := uint(u)
+	fails:=model.GetUserFail(user_id)
+	return c.JSON(http.StatusOK, fails)
+}
 
+func CreateFail(c echo.Context) error {
+	content := c.FormValue("content")
+	print("start!!")
+	u := c.FormValue("user_id")
+	id,_:=strconv.Atoi(u)
+	user_id := uint(id)
+	print(user_id)
 	fail := model.Fail{
 		Content:	content,
 		User_id:	user_id,
