@@ -11,7 +11,7 @@ func GetUser(c echo.Context) error {
 	i, _ := strconv.Atoi(c.Param("id"))
 	id := uint(i)
 	user := model.User{}
-	user.FirstById(id)
+	user.FirstByUserId(id)
 
 	return c.JSON(http.StatusOK, user)
 }
@@ -24,7 +24,7 @@ func CreateUser(c echo.Context) error {
 		Name:	name,
 		Password:	password,
 	}
-	user.Create()
+	user.CreateUser()
 
 	return c.JSON(http.StatusOK, user)
 }
@@ -40,7 +40,7 @@ func UpdateUser(c echo.Context) error {
 		Name:	name,
 		Password:	password,
 	}
-	user.Updates()
+	user.UpdatesUser()
 
 	return c.JSON(http.StatusOK, user)
 }
@@ -49,7 +49,7 @@ func DeleteUser(c echo.Context) error {
 	i, _ := strconv.Atoi(c.Param("id"))
 	id := uint(i)
 	user := model.User{}
-	user.DeleteById(id)
+	user.DeleteByUserId(id)
 
 	return c.JSON(http.StatusOK, user)
 }

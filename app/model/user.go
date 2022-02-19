@@ -10,26 +10,26 @@ type User struct {
 	Password       string      `json:"password" gorm:"type:varchar(64);not null"`
 }
 
-func (p *User) FirstById(id uint) (tx *gorm.DB) {
+func (p *User) FirstByUserId(id uint) (tx *gorm.DB) {
 	return DB.Where("id = ?", id).First(&p)
 }
 
-func (p *User) Create() (tx *gorm.DB) {
+func (p *User) CreateUser() (tx *gorm.DB) {
 	return DB.Create(&p)
 }
 
-func (p *User) Save() (tx *gorm.DB) {
+func (p *User) SaveUser() (tx *gorm.DB) {
 	return DB.Save(&p)
 }
 
-func (p *User) Updates() (tx *gorm.DB) {
+func (p *User) UpdatesUser() (tx *gorm.DB) {
 	return DB.Model(&p).Updates(p)
 }
 
-func (p *User) Delete() (tx *gorm.DB) {
+func (p *User) DeleteUser() (tx *gorm.DB) {
 	return DB.Delete(&p)
 }
 
-func (p *User) DeleteById(id uint) (tx *gorm.DB) {
+func (p *User) DeleteByUserId(id uint) (tx *gorm.DB) {
 	return DB.Where("id = ?", id).Delete(&p)
 }
