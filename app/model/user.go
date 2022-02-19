@@ -14,6 +14,12 @@ func (p *User) FirstByUserId(id uint) (tx *gorm.DB) {
 	return DB.Where("id = ?", id).First(&p)
 }
 
+func GetAllUser()  []User{
+	users := []User{}
+	DB.Find(&users)
+	return users
+}
+
 func (p *User) CreateUser() (tx *gorm.DB) {
 	return DB.Create(&p)
 }

@@ -16,6 +16,16 @@ func GetUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
+func GetAllUser(c echo.Context) error {
+	//user := model.User{}
+	//user.GetAllUser()
+	users:=model.GetAllUser()
+	print(users)
+	user := model.User{}
+	user.FirstByUserId(1)
+	return c.JSON(http.StatusOK, users)
+}
+
 func CreateUser(c echo.Context) error {
 	name := c.FormValue("name")
 	password := c.FormValue("password")

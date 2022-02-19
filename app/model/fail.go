@@ -14,6 +14,15 @@ func (p *Fail) FirstByFailId(id uint) (tx *gorm.DB) {
 	return DB.Where("id = ?", id).First(&p)
 }
 
+func (p *Fail) GetALLFail(id uint) (tx *gorm.DB) {
+	var fail Fail
+	return DB.Find(&fail)
+}
+
+func (p *Fail) GetUserFail(id uint) (tx *gorm.DB) {
+	return DB.Where("user_id = ?", id).First(&p)
+}
+
 func (p *Fail) CreateFail() (tx *gorm.DB) {
 	return DB.Create(&p)
 }
