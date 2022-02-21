@@ -20,6 +20,10 @@ func GetAllUser()  []User{
 	return users
 }
 
+func (p *User) GetLogIn(name string,password string) (tx *gorm.DB){
+	return DB.Where("name = ? AND password = ?", name,password).First(&p)
+}
+
 func (p *User) CreateUser() (tx *gorm.DB) {
 	return DB.Create(&p)
 }

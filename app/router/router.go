@@ -21,6 +21,9 @@ func Init() {
 	e.POST("/user", controller.CreateUser)
 	e.PUT("/user/:id", controller.UpdateUser)
 	e.DELETE("/user/:id", controller.DeleteUser)
+	e.POST("/login", controller.Login)
+
+
 	e.GET("/fail/:id", controller.GetFail)
 	e.POST("/fail", controller.CreateFail)
 	e.PUT("/fail/:id", controller.UpdateFail)

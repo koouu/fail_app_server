@@ -58,3 +58,13 @@ func DeleteUser(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, user)
 }
+
+func Login(c echo.Context) error {
+	name := c.FormValue("name")
+	password := c.FormValue("password")
+
+	user := model.User{}
+	user.GetLogIn(name,password)
+
+	return c.JSON(http.StatusOK, user)
+}
